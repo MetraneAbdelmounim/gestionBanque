@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  layout:decorator="template1">
+  
+<head>
+<meta charset="utf-8"/>
+<title>Ma Banque</title>
+  <link rel="stylesheet" type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
+  th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css"
+  href="css/style.css"
+  th:href="@{css/style.css}"/>
+</head>
+<body >
+	<div layout:fragment="content" >
+		 <div class="container-fluid" sec:authorize="hasRole('ROLE_ADMIN')">
+     		
+		        <div class="message">
+		        	<div class="card card-primary">
+		        		<div class="card-header bg-info text-white">Liste des Clients </div>
+						<div class="card-body">
+							<table class="table table-striped table-dark text-center">
+								  <thead>
+								    <tr>
+								      <th scope="col">Numéro du client</th>
+								      <th scope="col">Nom</th>
+								      <th scope="col">email</th>
+								    </tr>
+								  </thead>
+								  <tbody >
+								    <tr th:each="c:${listeClients}">
+								      <td th:text="${c.code}"></td>
+								      <td th:text="${c.nom}"></td>
+								      <td th:text="${c.email}"></td>
+								    </tr> 
+								  </tbody>
+								</table>
+								  <div class="text-center">
+									 <a th:href="@{/addClient}" class=" ">Ajouter un Client</a>
+								</div>
+						</div>        	
+		        	</div>
+		        </div>
+	     	 
+	     </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  layout:decorator="template1">
+  
+<head>
+<meta charset="utf-8"/>
+<title>Ma Banque</title>
+  <link rel="stylesheet" type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
+  th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css"
+  href="css/style.css"
+  th:href="@{css/style.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		 <div class="container-fluid" sec:authorize="hasRole('ROLE_ADMIN')">
+     		<div class="row">
+		        <div class="col-md-6 offset-md-3 message">
+		        	<div class="card card-primary">
+		        		<div class="card-header bg-info text-white">Formulaire Client </div>
+						<div class="card-body">
+							<form th:action="@{/saveClient}" method="post">
+								<div>
+								 	<label> Nom du client : </label>
+								 	<input type="text" name="nomClient" />
+								</div>
+								<div>
+								 	<label> Email     : </label>
+								 	<input type="text" name="emailClient" />
+								</div>
+								<div class="text-danger text-center"  th:text="${#httpServletRequest.getParameter('erreur')}"></div>
+								<button class="btn btn-primary" type="submit" >Save Client</button>
+							</form>
+						</div>        	
+		        	</div>
+		        </div>
+	     	 </div>
+	     </div>
+	</div>
+</body>
+</html>

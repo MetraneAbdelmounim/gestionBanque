@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  layout:decorator="template1">
+  
+<head>
+<meta charset="utf-8"/>
+<title>Ma Banque</title>
+  <link rel="stylesheet" type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
+  th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css"
+  href="css/style.css"
+  th:href="@{css/style.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		 <div class="container-fluid" sec:authorize="hasRole('ROLE_ADMIN')">		
+		        <div class="message">
+		        	
+		        	<div class="card card-primary">
+		        		<div class="card-header bg-info text-white">Liste des des comptes </div>
+						<div class="card-body">
+							<table class="table table-striped table-dark text-center">
+								  <thead>
+								    <tr>
+								      <th scope="col">Numéro du Compte</th>
+								      <th scope="col">Date de création</th>
+								      <th scope="col">Type de compte</th>
+								      <th scope="col">Découvert</th>
+								      <th scope="col">Taux</th>
+								      <th scope="col">Solde</th>
+								      <th scope="col">Client</th>
+								      <th scope="col">Action</th>
+								    </tr>
+								  </thead>
+								  <tbody >
+								    <tr th:each="c:${listeComptes}">
+									    <div th:if="${c.class.getSimpleName()=='CompteCourant'}">
+									      <td th:text="${c.codeCompte}"></td>
+									      <td th:text="${c.dateCreation}"></td>
+									      <td>Compte Courant</td>
+									      <td th:text="${c.decouvert}"></td>
+									      <td class="null">null</td>
+									      <td th:text="${c.solde}"></td>
+									      <td th:text="${c.client.code}"></td>
+									      <td><a th:href="@{/deleteCompte/{codeCompte}(codeCompte=${c.codeCompte})}" class="btn btn-danger btn-xs">Supprimer</a></td>
+									      
+									    </div>
+									    <div th:if="${c.class.getSimpleName()=='CompteEpargne'}">
+									      <td th:text="${c.codeCompte}"></td>
+									      <td th:text="${c.dateCreation}"></td>
+									      <td >Compte Epargne</td>
+									      <td class="null">null</td>
+									      <td th:text="${c.taux}"></td>
+									      <td th:text="${c.solde}"></td>
+									      <td th:text="${c.client.code}"></td>
+									      <td><a th:href="@{/deleteCompte/{codeCompte}(codeCompte=${c.codeCompte})}" class="btn btn-danger btn-xs">Supprimer</a></td>
+									    </div>    
+								    </tr> 
+								  </tbody>
+								</table>
+								<div class="text-center">
+								   <a th:href="@{/addCompte}" class=" ">Ajouter un Compte</a>
+								</div>
+						</div>        	
+		        	</div>
+		        </div>
+	     </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template1">
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
+  th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css"
+  href="css/style.css"
+  th:href="@{css/style.css}"/>
+<title>Votre Banque</title>
+</head>
+	<body>
+	  <div layout:fragment="content">
+	     <div class="container-fluid">
+     		<div class="row">
+		        <div class="col-md-6 offset-md-3 message">
+		        	<div class="card card-primary">
+		        		<div class="card-header bg-info text-white">Problème d'authorisation </div>
+						<div class="card-body">
+							<div class="text-danger text-center">Vous n'avez pas le droit d'accéder à cette ressource</div>
+						</div>        	
+		        	</div>
+		        </div>
+	     	 </div>
+	     </div>
+	  </div>
+	</body>
+</html>
